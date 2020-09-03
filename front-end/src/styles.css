@@ -1,0 +1,8 @@
+.btn-usco {
+    background-color: rgb(163, 156, 128)!important;
+    color: white!important;
+}
+.btn-usco:hover {
+    background-color: #9c9372!important;
+    color: #ebebeb!important;
+}

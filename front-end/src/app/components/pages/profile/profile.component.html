@@ -1,0 +1,80 @@
+<div class="container">
+    <br>
+    <br>
+    <div class="row justify-content-center" style="margin: 20px;">
+        <div class="col-4">
+            <img [src]="user.avatar" class="card-img-top avatar mx-auto d-block mt-2 " style="width:140px;
+            height:140px;
+            border-radius:140px;">
+        </div>
+        <div class="col-4">
+
+            <b> {{user.name}} {{user.lastname}} </b>
+            <br>
+            <p>
+                {{ user.birthdate | date }}
+                <br>
+                {{user.ocupation | lowercase}}
+                <br>
+                {{user.gender.name | lowercase}}
+                <br>
+                {{user.country.name | lowercase}}
+                <br>
+
+            </p>
+
+        </div>
+    </div>
+    <br>
+    <hr>
+    <br>
+    <div class="row" style="background-color: #F8F9F9; border-radius:10px;">
+        <div class="col-4">
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-opc active" (click)="zona(1)">General Information</button>
+            </div>
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-opc active" (click)="zona(2)">Academic Experence</button>
+            </div>
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-opc active" (click)="zona(3)">Job Information</button>
+            </div>
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-opc active" (click)="zona(4)">Groups</button>
+            </div>
+            <div class="row justify-content-center">
+                <button type="button" class="btn btn-opc active" (click)="zona(5)">Contact</button>
+            </div>
+        </div>
+        <div class="col-8">
+            <div *ngIf="this.opci==1">
+                <b> General Information </b>
+                <small class="text-right text-danger"
+                    [class.d-none]="gInfForm.controls['username'].valid || gInfForm.controls['username'].untouched">
+                    Nick is required and must be 3 digits*
+                </small>
+
+                <div class="form-group input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+                    </div>
+                    <input name="username" class="form-control " formControlName="username" placeholder="username"
+                        type="text" required>
+                </div> <!-- form-group// -->
+
+            </div>
+            <div *ngIf="this.opci==2">
+                Academic Experence
+            </div>
+            <div *ngIf="this.opci==3">
+                Job Information
+            </div>
+            <div *ngIf="this.opci==4">
+                Groups
+            </div>
+            <div *ngIf="this.opci==5">
+                Contact
+            </div>
+        </div>
+    </div>
+</div>

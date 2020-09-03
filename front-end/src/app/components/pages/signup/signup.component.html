@@ -1,0 +1,174 @@
+<div class=" mx-auto col-9">
+    <div class="text-mono text-center text-gray-light text-normal mb-3">Join Usco</div>
+    <h1 class="d-none d-md-block mt-0 mb-3 text-center h00-mktg lh-condensed-ultra ">Create your account</h1>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="container mb-4">
+            <div class="card border-gray mx-auto text-center" style="width: 500px;">
+                <img *ngIf="!show_photo" [src]="new_image" class="card-img-top avatar mx-auto d-block mt-2" alt="...">
+                <img *ngIf="show_photo" [src]="urlImage | async" class="card-img-top avatar mx-auto d-block mt-2"
+                    alt="...">
+                    
+                <div class="card-body">
+                    <small class="text-right text-danger" style="text-align: center;">
+                        profile photo is required*</small>
+                    <label for="fileUpload" class="file-upload btn btn-danger btn-block rounded-pill shadow"><i
+                            class="fa fa-upload mr-2"></i>Añadir foto
+                        <input id="fileUpload" (change)="onUpload($event)" type="file" accept=".png, .jpg">
+                    </label>
+                    <!--<i class="fas fa-upload"></i> <input class="btn btn-danger" type="file" (change)="onUpload($event)" accept=".png, .jpg"/>-->
+                </div>
+            </div>
+           
+        </div>
+
+        <!--Input nick name-->
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['username'].valid || registerForm.controls['username'].untouched">
+            Nick is required and must be 3 digits*</small>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-id-card"></i></span>
+            </div>
+            <input name="username" class="form-control " formControlName="username" placeholder="username" type="text"
+                required>
+        </div> <!-- form-group// -->
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['name'].valid || registerForm.controls['name'].untouched"> Name is
+            required and must be 3 digits*</small>
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['lastname'].valid || registerForm.controls['lastname'].untouched">
+            <br> lastName is required and must be 3 digits*</small>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-user"></i> </span>
+            </div>
+            <input name="name" class="form-control mr-3" formControlName="name" placeholder="Name" type="text">
+            <input name="lastname" class="form-control ml-3" formControlName="lastname" placeholder="Lastname"
+                type="text">
+        </div> <!-- form-group// -->
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['email'].valid || registerForm.controls['email'].untouched"> email is
+            required and must be 4 digits*</small>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-envelope"></i> </span>
+            </div>
+            <input name="email" class="form-control" formControlName="email" placeholder="Email address" type="email"
+                email>
+        </div> <!-- form-group// -->
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['birthdate'].valid || registerForm.controls['birthdate'].untouched">
+            birthdate is required*</small>
+        <div class="form-group">
+            <div class="input-group">
+                <input type="date" class="form-control" name="birthdate" formControlName="birthdate">
+            </div>
+        </div>
+
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['gender'].valid || registerForm.controls['gender'].untouched"> gender
+            is required*</small>
+        <div class="form-group input-group" formGroupName="gender">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fas fa-venus-mars"></i> </span>
+            </div>
+            <select name="gender" formControlName="id" class="form-control">
+                <option *ngFor="let item of genders" value={{item.id}}> {{item.name}}</option>
+            </select>
+        </div>
+
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['country'].valid || registerForm.controls['country'].untouched">
+            nationality is required*</small>
+        <div class="form-group input-group" formGroupName="country">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fas fa-globe"></i> </span>
+            </div>
+            <select name="country" formControlName="id" class="form-control">
+                <option *ngFor="let item of countries" value={{item.id}}> {{item.name}}</option>
+            </select>
+        </div>
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['docType'].valid || registerForm.controls['docType'].untouched">
+            Document's type is required*</small>
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['docId'].valid || registerForm.controls['docId'].untouched"> <br>
+            Number Document is required and must be 5 digits*</small>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-address-card"></i></span>
+            </div>
+            <div formGroupName="docType">
+                <select name="docType" formControlName="id" class="custom-select" style="max-width: 200px;">
+                    <option *ngFor="let item of doctypes" value={{item.id}}> {{item.name}}</option>
+                </select>
+            </div>
+            <input name="docId" class="form-control  ml-3" formControlName="docId" placeholder="Identification number"
+                type="text">
+        </div> <!-- form-group// -->
+
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['cellphone'].valid || registerForm.controls['cellphone'].untouched">
+            numberPhone type is required and must be 5 digits*</small>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-phone"></i> </span>
+            </div>
+
+            <input name="cellphone" class="form-control  " formControlName="cellphone" placeholder="cellphone"
+                type="text">
+        </div> <!-- form-group// -->
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['ocupation'].valid || registerForm.controls['ocupation'].untouched">
+            occupation is required*</small>
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-building"></i> </span>
+            </div>
+            <input name="ocupation" class="form-control " formControlName="ocupation" placeholder="occupation"
+                type="text" required>
+        </div> <!-- form-group end.// -->
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['password'].valid || registerForm.controls['password'].untouched">
+            password is required and must be 5 digits*</small>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input name="password" class="form-control" formControlName="password" placeholder="Create password"
+                type="password">
+        </div> <!-- form-group// -->
+
+        <small class="text-right text-danger"
+            [class.d-none]="registerForm.controls['password2'].valid || registerForm.controls['password2'].untouched">
+            password-confirm is required and must be equals password</small>
+
+        <div class="form-group input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
+            </div>
+            <input name="password2" class="form-control" formControlName="password2" placeholder="Repeat password"
+                type="password">
+        </div> <!-- form-group// -->
+
+        <div class="form-group">
+            <button type="submit" [disabled]="registerForm.invalid" class="btn btn-usco btn-block"> Create Account
+            </button>
+        </div> <!-- form-group// -->
+
+        <p class="text-center">Have an account? <a [routerLink]="['/signin']">Log In</a> </p>
+    </form>
+
+
+</div>
+<!-- card.// -->
